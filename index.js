@@ -1,4 +1,4 @@
-import { Actor } from 'rabbi'
+const Actor = require("rabbi")
 const express = require("express")
 
 const app = express()
