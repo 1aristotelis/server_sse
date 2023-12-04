@@ -1,4 +1,4 @@
-const Actor = require("rabbi")
+const { Actor } = require("rabbi")
 const express = require("express")
 
 const app = express()
@@ -13,7 +13,7 @@ app.get('/bsv/mempool', (req, res) => {
 		Connection: 'keep-alive',
 		'Cache-Control': 'no-cache',
 	});
-    res.write('event: connected')
+    res.write('event: connected \n')
     Actor.create({
         exchange: 'sapience',
         routingkey: 'bsv.spv.mempool',
@@ -21,7 +21,7 @@ app.get('/bsv/mempool', (req, res) => {
     })
     .start(async (channel, msg, json) => {
         const { transaction, size } = json
-        res.write(`data: ${JSON.stringify({ transaction, size })}`)
+        res.write(`data: ${JSON.stringify({ transaction, size })}\n`)
     })
     req.on('close', () => res.end('OK'))
 });
@@ -32,7 +32,7 @@ app.get('/btc/mempool', (req, res) => {
 		Connection: 'keep-alive',
 		'Cache-Control': 'no-cache',
 	});
-    res.write('event: connected')
+    res.write('event: connected\n')
     Actor.create({
         exchange: 'sapience',
         routingkey: 'btc.spv.mempool',
@@ -40,7 +40,7 @@ app.get('/btc/mempool', (req, res) => {
     })
     .start(async (channel, msg, json) => {
         const { transaction, size } = json
-        res.write(`data: ${JSON.stringify({ transaction, size })}`)
+        res.write(`data: ${JSON.stringify({ transaction, size })}\n`)
     })
     req.on('close', () => res.end('OK'))
 });
@@ -51,7 +51,7 @@ app.get('/bsv/block', (req,res) => {
 		Connection: 'keep-alive',
 		'Cache-Control': 'no-cache',
 	});
-    res.write('event: connected')
+    res.write('event: connected\n')
     Actor.create({
         exchange: 'sapience',
         routingkey: 'bsv.spv.block',
@@ -77,7 +77,7 @@ app.get('/bsv/block', (req,res) => {
             txCount,
             transactions,
             startDate,
-        })}`)
+        })}\n`)
     })
     req.on('close', () => res.end('OK'))
 })
@@ -88,7 +88,7 @@ app.get('/btc/block', (req,res) => {
 		Connection: 'keep-alive',
 		'Cache-Control': 'no-cache',
 	});
-    res.write('event: connected')
+    res.write('event: connected\n')
     Actor.create({
         exchange: 'sapience',
         routingkey: 'btc.spv.block',
@@ -114,7 +114,7 @@ app.get('/btc/block', (req,res) => {
             txCount,
             transactions,
             startDate,
-        })}`)
+        })}\n`)
     })
     req.on('close', () => res.end('OK'))
 })
@@ -125,7 +125,7 @@ app.get('/bsv/reorg', (req,res) => {
 		Connection: 'keep-alive',
 		'Cache-Control': 'no-cache',
 	});
-    res.write('event: connected')
+    res.write('event: connected\n')
     Actor.create({
         exchange: 'sapience',
         routingkey: 'bsv.spv.reorg',
@@ -133,7 +133,7 @@ app.get('/bsv/reorg', (req,res) => {
     })
     .start(async (channel, msg, json) => {
         const { height, hash } = json
-        res.write(`data: ${JSON.stringify({ height, hash })}`)
+        res.write(`data: ${JSON.stringify({ height, hash })}\n`)
     })
     req.on('close', () => res.end('OK'))
 })
@@ -144,7 +144,7 @@ app.get('/btc/reorg', (req,res) => {
 		Connection: 'keep-alive',
 		'Cache-Control': 'no-cache',
 	});
-    res.write('event: connected')
+    res.write('event: connected\n')
     Actor.create({
         exchange: 'sapience',
         routingkey: 'btc.spv.reorg',
@@ -152,7 +152,7 @@ app.get('/btc/reorg', (req,res) => {
     })
     .start(async (channel, msg, json) => {
         const { height, hash } = json
-        res.write(`data: ${JSON.stringify({ height, hash })}`)
+        res.write(`data: ${JSON.stringify({ height, hash })}\n`)
     })
     req.on('close', () => res.end('OK'))
 })
